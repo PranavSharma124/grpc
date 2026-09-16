@@ -67,6 +67,8 @@ void SimpleRequestBody(CoreEnd2endTest& test) {
   CheckPeer(*s.GetPeer());
   EXPECT_NE(c.GetPeer(), std::nullopt);
   CheckPeer(*c.GetPeer());
+  EXPECT_NE(s.GetLocalAddress(), std::nullopt);
+
   IncomingCloseOnServer client_close;
   s.NewBatch(102)
       .SendInitialMetadata({})
