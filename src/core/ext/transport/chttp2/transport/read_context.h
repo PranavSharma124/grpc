@@ -22,12 +22,14 @@
 #include <grpc/support/port_platform.h>
 
 #include <cstdint>
+#include <memory>
 #include <string>
 #include <utility>
 
 #include "src/core/call/metadata_info.h"
 #include "src/core/ext/transport/chttp2/transport/header_assembler.h"
 #include "src/core/ext/transport/chttp2/transport/hpack_parser.h"
+#include "src/core/ext/transport/chttp2/transport/http2_stats_collector.h"
 #include "src/core/ext/transport/chttp2/transport/http2_status.h"
 #include "src/core/ext/transport/chttp2/transport/http2_transport.h"
 #include "src/core/ext/transport/chttp2/transport/stream.h"
@@ -220,6 +222,12 @@ class ReadContext {
 
   void SetMaxHeaderTableSize(const uint32_t size) {
     parser_.hpack_table()->SetMaxBytes(size);
+  }
+
+  void SetHttp2StatsCollector(
+      std::shared_ptr<Http2StatsCollector> http2_stats_collector) {
+    parser_.hpack_table()->SetHttp2StatsCollector(
+        std::move(http2_stats_collector));
   }
 
   // This function is used to partially process a HEADER or CONTINUATION frame.

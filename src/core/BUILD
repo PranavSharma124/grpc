@@ -9451,6 +9451,7 @@ grpc_cc_library(
         "event_engine_tcp_socket_utils",
         "grpc_check",
         "grpc_promise_endpoint",
+        "http2_stats_collector",
         "slice",
         ":header_assembler",
         ":http2_status",
@@ -9619,6 +9620,7 @@ grpc_cc_library(
         "http2_settings",
         "http2_settings_manager",
         "http2_settings_promises",
+        "http2_stats_collector",
         "http2_status",
         "http2_transport",
         "http2_ztrace_collector",
@@ -9671,6 +9673,7 @@ grpc_cc_library(
         "//:orphanable",
         "//:promise",
         "//:ref_counted_ptr",
+        "//:transport_auth_context",
     ],
 )
 
@@ -9717,6 +9720,7 @@ grpc_cc_library(
         "http2_settings",
         "http2_settings_manager",
         "http2_settings_promises",
+        "http2_stats_collector",
         "http2_status",
         "http2_transport",
         "http2_ztrace_collector",
@@ -9770,6 +9774,7 @@ grpc_cc_library(
         "//:orphanable",
         "//:promise",
         "//:ref_counted_ptr",
+        "//:transport_auth_context",
     ],
 )
 
