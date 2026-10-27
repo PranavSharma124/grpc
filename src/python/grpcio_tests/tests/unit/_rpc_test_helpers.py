@@ -420,7 +420,10 @@ class BaseRPCTest:
             request,
             metadata=(("test", "ConsumingOneStreamResponseUnaryRequest"),),
         )
-        next(response_iterator)
+        try:
+            next(response_iterator)
+        finally:
+            response_iterator.cancel()
 
     def _consume_some_but_not_all_stream_responses_unary_request(
         self, multi_callable
@@ -433,8 +436,11 @@ class BaseRPCTest:
                 ("test", "ConsumingSomeButNotAllStreamResponsesUnaryRequest"),
             ),
         )
-        for _ in range(test_constants.STREAM_LENGTH // 2):
-            next(response_iterator)
+        try:
+            for _ in range(test_constants.STREAM_LENGTH // 2):
+                next(response_iterator)
+        finally:
+            response_iterator.cancel()
 
     def _consume_some_but_not_all_stream_responses_stream_request(
         self, multi_callable
@@ -450,8 +456,11 @@ class BaseRPCTest:
                 ("test", "ConsumingSomeButNotAllStreamResponsesStreamRequest"),
             ),
         )
-        for _ in range(test_constants.STREAM_LENGTH // 2):
-            next(response_iterator)
+        try:
+            for _ in range(test_constants.STREAM_LENGTH // 2):
+                next(response_iterator)
+        finally:
+            response_iterator.cancel()
 
     def _consume_too_many_stream_responses_stream_request(self, multi_callable):
         requests = tuple(
